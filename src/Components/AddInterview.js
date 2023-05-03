@@ -31,40 +31,44 @@ const H1 = styled.h1`
 `
 //2020-12-18 10:10:08
 
-export default function AddInterview({query, onQuery, onWeek, onYear, onMonth}) {
+export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, onYear, onMonth}) {
 
   const [day, setDay] = useState('');
   const [hour, setHour] = useState('');
 
   useEffect(() => {
-    if (typeof query[0] === 'string'){
+    if (typeof queryV[0] === 'string'){
     currently()}
-  },[query])
+  },[queryV])
 
   const handlePlus = () => {
     let datee = prompt("YYYY-MM-DD HH:mm:ss");
-    let format = datee.slice(0,10) + 'T22:' + datee.slice(11,16)+'.'+datee.slice(17)+'0Z';
-    onQuery([format]);
+    if (datee){
+      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17)+'0Z';
+      onQueryV([format]);
+      onQuery([...query, format])
+    }
   }
 
   const handleToday = () => {
     //let datee = prompt("YYYY-MM-DD HH:mm:ss");
     let q = new Date();
     let qu = q.toISOString();
-    onQuery([qu]);
+    onQueryV([qu]);
   }
 
   const currently = () => {
-    if (query[0]!==undefined && query[0]!==null && query[0]!==false){
-    let chosenDay = query[query.length-1];
+    if (queryV[0]!==undefined && queryV[0]!==null && queryV[0]!==false){
+    let chosenDay = queryV[queryV.length-1];
     //console.log(getWeekFromDate(`2020-12-18T22:10:10.080Z`));
-    if (chosenDay)
-    console.log(chosenDay);
-    let result = getWeekFromDate(chosenDay);
-    let weekDays = result.map(r => r);
-    onYear(chosenDay.slice(0,4));
-    onMonth(chosenDay.slice(5,7));
-    onWeek(weekDays);
+    if (chosenDay){
+    //console.log(chosenDay);
+    let mon = getMonday(chosenDay);
+    let result = getWeekFromDate(mon);
+    //let weekDays = result.map(r => r);
+    onYear(mon.slice(0,4));
+    onMonth(mon.slice(5,7));
+    onWeek(result);}
   }
   }
 
@@ -78,9 +82,9 @@ export default function AddInterview({query, onQuery, onWeek, onYear, onMonth}) 
 
 const  getWeek = (mon) => {
     let arr = [];
-    arr.push(mon)
+    arr.push(mon);
     for (let i=0; i<=5; i++){
-        arr.push(getNextDate(arr[i]).toISOString())
+        arr.push(getNextDate(arr[i]).toISOString());
     }
     return arr;
 }
@@ -102,7 +106,6 @@ const getWeekFromDate = (d) => {
     <Heading>
       <H1>Interviews Calendar</H1>
       <Plus onClick={handlePlus}>+</Plus>
-      <button id='today' onClick={handleToday}>Today</button>
     </Heading>
   );
 }

@@ -35,6 +35,25 @@ const Month = styled.div`
   justify-content: space-between;
 `
 
+const Btn = styled.button`
+    margin-right: 30px;
+    border: none;
+    padding: 0;
+    background: none;
+`;
+
+const Arrow = styled(Btn)`
+  font-size: 2rem;
+  color: red;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: palevioletred;
+  }
+  &:active {
+    color: coral;
+  }
+`;
 
 function Week({query, year, month, week, onWeek, onYear, onMonth}) {
 
@@ -92,9 +111,9 @@ function Week({query, year, month, week, onWeek, onYear, onMonth}) {
         {chosenWeek.map((day, i) => <Item key={i}>{day}</Item>)}
       </Grid>
       <Month>
-        <button onClick={handleBack} id="back">{'<'}</button>
+        <Arrow onClick={handleBack} id="back">{'<'}</Arrow>
         <h2>{year ? `${year} ${toName(month)}` : '2023'} </h2>
-        <button onClick={handleNext} id="next">{'>'}</button>
+        <Arrow onClick={handleNext} id="next">{'>'}</Arrow>
       </Month>
     </Wrapped>
   );
