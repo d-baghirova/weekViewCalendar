@@ -44,7 +44,7 @@ const Btn = styled.button`
     padding: 0;
     background: none;
 `;
-
+ 
 const P = styled.p`
   font-size: 1.5rem;
 `
