@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-//import AddInterview from "./AddInterview";
 import styled from 'styled-components';
 
 const Wrapped = styled.div`
   background-color: #f6f6f6;
+  border: 2px solid #e6e6e6;
 `
 
 const Grid = styled.div`
@@ -15,17 +15,20 @@ const Item = styled.div`
   background-color: #f6f6f6;
   border: 1px solid transparent;
   padding: 20px;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
 `
-const Arrow1 = styled.span`
-  margin-left: 50px;  
-  color:red;
-`
 
-const Arrow2 = styled.span`
-  margin-right: 50px;
-  color:red;
+const ItemToday = styled.div`
+  background-color: red;
+  color: white;
+  border: 1px solid transparent;
+  border-radius:100%;
+  width: 30px;
+  height: 30px;
+  margin: 20px 0 0 20px ;
+  font-size: 20px;
+  text-align: center;
 `
 
 const Month = styled.div`
@@ -41,6 +44,10 @@ const Btn = styled.button`
     padding: 0;
     background: none;
 `;
+
+const P = styled.p`
+  font-size: 1.5rem;
+`
 
 const Arrow = styled(Btn)`
   font-size: 2rem;
@@ -58,6 +65,12 @@ const Arrow = styled(Btn)`
 function Week({query, year, month, week, onWeek, onYear, onMonth}) {
 
   const chosenWeek = ['','M', 'T', 'W', 'T', 'F', 'S', 'S', ''];
+  const todayDate = new Date();
+  const tdate = week.find(d => d.slice(0,10) === todayDate.toISOString().slice(0,10));
+  let ind;
+  if (tdate){
+    ind = week.indexOf(tdate);
+  }
   if (week){
     week.forEach(d => {
       chosenWeek.push(d.slice(8,10));
@@ -67,6 +80,7 @@ function Week({query, year, month, week, onWeek, onYear, onMonth}) {
   const getNextDate = (str, i) => {
     const today = Date.parse(str);
     const tomorrow = new Date(today);
+
     tomorrow.setDate(tomorrow.getDate() + i);
     return tomorrow;
 }
@@ -74,8 +88,6 @@ function Week({query, year, month, week, onWeek, onYear, onMonth}) {
   const getSequentWeek = (w, i) => {
     let nw = w.map(d => getNextDate(d, i).toISOString())
     return nw
-    //let arr = getWeek(mon);
-    //return arr;
   }
 
   const handleNext = () => {
@@ -101,18 +113,15 @@ function Week({query, year, month, week, onWeek, onYear, onMonth}) {
     let ind = monthNums.indexOf(m);
     return monthNames[ind];
   }
-  //if (query){
-  //  let date = query[query.length-1]
-  //}
   
   return (
     <Wrapped>
       <Grid>
-        {chosenWeek.map((day, i) => <Item key={i}>{day}</Item>)}
+        {chosenWeek.map((day, i) => i===ind+8 ? <ItemToday key={i}>{day}</ItemToday> : <Item key={i}>{day}</Item>)}
       </Grid>
       <Month>
         <Arrow onClick={handleBack} id="back">{'<'}</Arrow>
-        <h2>{year ? `${year} ${toName(month)}` : '2023'} </h2>
+        <P>{year ? `${year} ${toName(month)}` : '2023'} </P>
         <Arrow onClick={handleNext} id="next">{'>'}</Arrow>
       </Month>
     </Wrapped>

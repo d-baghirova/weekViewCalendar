@@ -27,12 +27,7 @@ const Heading = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #f6f6f6;
-  border: 2px solid transparent;
-`
-
-const H1 = styled.p`
-  margin-left: 30px;
-  font-size: 2rem;
+  border: 2px solid #e6e6e6;
 `
 
 const Day = styled.button`
@@ -43,7 +38,7 @@ const Day = styled.button`
 `
 
 const Today = styled(Day)`
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: red;
   text-decoration: none;
   &:hover,
@@ -73,7 +68,6 @@ export default function Delete({query, onQuery, onClicked, clicked, onQueryDelet
   }
 
   const handleToday = () => {
-    //let datee = prompt("YYYY-MM-DD HH:mm:ss");
     let q = new Date();
     let qu = q.toISOString();
     onQueryV([qu]);
@@ -86,7 +80,7 @@ export default function Delete({query, onQuery, onClicked, clicked, onQueryDelet
       setDeleteIt(`${clicked[1]}`);
       onQueryDelete(`${clicked[1]}` );
       onQuery(deleteItem);
-      onClicked([false])
+      onClicked([false, '0btn'])
     }
     } else {
       document.getElementById('delete').style.display = 'none';

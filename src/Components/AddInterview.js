@@ -26,10 +26,10 @@ const Heading = styled.div`
   justify-content: space-between;
 `
 
-const H1 = styled.h1`
+const H1 = styled.p`
   margin-left: 30px;
+  font-size: 1.5rem;
 `
-//2020-12-18 10:10:08
 
 export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, onYear, onMonth}) {
 
@@ -41,31 +41,41 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
     currently()}
   },[queryV])
 
-  const handlePlus = () => {
-    let datee = prompt("YYYY-MM-DD HH:mm:ss");
-    if (datee){
-      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17)+'0Z';
-      onQueryV([format]);
-      onQuery([...query, format])
+  const validate = (str) => {
+    return !Number.isNaN(new Date(str).getTime());
+  }
+
+  const validateHour = (str) => {
+    if (str){
+      let num = str[11]==='0' ? Number(str.slice(12,13)) : Number(str.slice(11, 13));
+      if (num > 7 && num < 21){
+        return true
+      } else {
+        return false
+      }
     }
   }
 
-  const handleToday = () => {
-    //let datee = prompt("YYYY-MM-DD HH:mm:ss");
-    let q = new Date();
-    let qu = q.toISOString();
-    onQueryV([qu]);
+  const handlePlus = () => {
+    let datee = prompt("YYYY-MM-DD HH:mm:ss");
+    console.log(validateHour(datee))
+    if (validate(datee) && validateHour(datee)){
+      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17)+'0Z';
+      onQueryV([format]);
+      onQuery([...query, format])
+    } else if (!validate(datee)) {
+      alert('Incorect input! Correct input example: 2020-12-18 10:10:08 (year-month-day hours:minutes:seonds)')
+    } else if (!validateHour(datee)){
+      alert('You can schedule an interview only between 08:00 and 20:00!')
+    }
   }
 
   const currently = () => {
     if (queryV[0]!==undefined && queryV[0]!==null && queryV[0]!==false){
     let chosenDay = queryV[queryV.length-1];
-    //console.log(getWeekFromDate(`2020-12-18T22:10:10.080Z`));
     if (chosenDay){
-    //console.log(chosenDay);
     let mon = getMonday(chosenDay);
     let result = getWeekFromDate(mon);
-    //let weekDays = result.map(r => r);
     onYear(mon.slice(0,4));
     onMonth(mon.slice(5,7));
     onWeek(result);}
@@ -75,7 +85,7 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
   const getMonday = (d) => {
     d = new Date(d);
     let day = d.getDay(),
-       diff = d.getDate() - day + (day === 0 ? -6:1); // adjust when day is sunday
+       diff = d.getDate() - day + (day === 0 ? -6:1); 
     let result = new Date(d.setDate(diff))
     return result.toISOString();
 }

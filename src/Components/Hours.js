@@ -2,11 +2,6 @@ import React from "react";
 import styled from 'styled-components';
 import { useState, useEffect } from "react";
 
-const Button = styled.button`
-    margin-right: 30px;
-    padding: 0;
-`;
-
 const Grid = styled.div`
 display: grid;
 width: 87%;
@@ -14,11 +9,6 @@ grid-template-columns: repeat(7, 1fr);
 grid-template-row: repeat(18, 1fr);
 background-color: #e6e6e6;
 grid-gap: 1px
-`
-
-const Item = styled.div`
-background-color: white;
-text-align: center;
 `
 
 const H = styled.div`
@@ -30,22 +20,6 @@ const Hour = styled.div`
 display:flex
 `
 
-const Interview = styled.button`
-  border: 2px solid white; 
-  background-color:#ebecff; 
-  width: 100%; 
-  height: 100%
-`;
-
-const DeleteInterview = styled(Interview)`
-  font-size: 2rem;
-  color: red;
-  text-decoration: none;
-  &:active {
-    color: '#b3b7ff';
-  }
-`;
-
 function Hours({query, onClicked, clicked, queryDelete, onQueryDelete, week}) {
 
   const [hs, setHs] = useState('');
@@ -54,12 +28,8 @@ function Hours({query, onClicked, clicked, queryDelete, onQueryDelete, week}) {
 
   useEffect(() => {
     makeHs();
-    findMod3();
+    findMod2();
   }, [])
-
-  //new idea
-
-  //new idea
 
   const makeHs = () => {
     let hours = document.getElementById("H");
@@ -82,7 +52,7 @@ function Hours({query, onClicked, clicked, queryDelete, onQueryDelete, week}) {
     }
   }
 
-  const findMod3 = () => {
+  const findMod2 = () => {
     let s = ``;
     let str = ``;
     for (let i=0; i<(13*7); i++){
@@ -103,7 +73,7 @@ function Hours({query, onClicked, clicked, queryDelete, onQueryDelete, week}) {
 
   const toggleClick = (e) => {
     onClicked([!clicked[0], e.target.id]);
-    onQueryDelete(e.target.id)
+    onQueryDelete(e.target.id);
   }
 
   const getInterviews = (arr) => {
@@ -113,18 +83,9 @@ function Hours({query, onClicked, clicked, queryDelete, onQueryDelete, week}) {
           let fieldId = findField(r);
           let btnId = fieldId+'btn';
           let format = [r.slice(8,10)];
-    //let day = week.indexOf(dayArr[0]);
-
-          document.getElementById(fieldId).innerHTML=`<button style="border: 2px solid white; background-color:#ebecff; width: 100%; height: 100%" id=${btnId}></button>`;
+          document.getElementById(fieldId).innerHTML=clicked[0] && clicked[1]===btnId ?`<button style="border: 2px solid white; background-color:#b3b7ff; width: 100%; height: 100%" id=${btnId}></button>`:`<button style="border: 2px solid white; background-color:#ebecff; width: 100%; height: 100%" id=${btnId}></button>`;
           document.getElementById(btnId).onclick = toggleClick
-          //if (clicked[1]){
-            //if (clicked[0] && clicked[1] !== undefined && clicked !== null && clicked !== false && clicked){
-//document.getElementById(clicked[1]).style.backgroundColor = '#b3b7ff'
-            //} 
-          //}//else if (clicked[0])  {
-          //  document.getElementById(clicked[1]).style.backgroundColor = '#ebecff'
-          //}
-        }//
+        }
       };
     }
   }

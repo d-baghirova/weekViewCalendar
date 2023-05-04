@@ -6,16 +6,22 @@ import Hours from "./Hours";
 import Delete from "./Delete";
 import { useState } from "react";
 
+const Calendar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content:center;
+`
+
 const Wrapper = styled.section`
+  max-width: 750px;
   padding: 1em;
   background:white;
-  border: 2px solid lightgray;
   margin:0;
   padding:0;
+  border: 2px solid #e6e6e6;
 `;
 
 function App() {
-  //const [queryDelete, setQueryDelete] = useState('');
   let q = new Date();
   let qu = q.toISOString();
   const [queryV, setQueryV] = useState([qu]);
@@ -26,17 +32,16 @@ function App() {
   const [queryDelete, setQueryDelete] = useState('');
   const [query, setQuery] = useState([]);
   const [clicked, setClicked] = useState([false, '0btn']);
-  
-  //const [clicked, setClicked] = useState([false]);
 
   return (
-  <Wrapper>
-    <AddInterview query={query} onQuery={setQuery} queryV={queryV} onQueryV={setQueryV} onWeek={setWeek} onYear={setYear} onMonth={setMonth} />
-    <Week queryV={queryV} year={year} month={month} week={week} onWeek={setWeek} onYear={setYear} onMonth={setMonth} />
-    <Hours onClicked={setClicked} clicked={clicked}  query={query} queryDelete={queryDelete} onQueryDelete={setQueryDelete} week={week} />
-    <Delete query={query} onQuery={setQuery} onClicked={setClicked} clicked={clicked} onQueryDelete={setQueryDelete} queryDelete={queryDelete} week={week} onQueryV={setQueryV} />
-    
-  </Wrapper>
+    <Calendar>
+      <Wrapper>
+        <AddInterview query={query} onQuery={setQuery} queryV={queryV} onQueryV={setQueryV} onWeek={setWeek} onYear={setYear} onMonth={setMonth} />
+        <Week queryV={queryV} year={year} month={month} week={week} onWeek={setWeek} onYear={setYear} onMonth={setMonth} />
+        <Hours onClicked={setClicked} clicked={clicked}  query={query} queryDelete={queryDelete} onQueryDelete={setQueryDelete} week={week} />
+        <Delete query={query} onQuery={setQuery} onClicked={setClicked} clicked={clicked} onQueryDelete={setQueryDelete} queryDelete={queryDelete} week={week} onQueryV={setQueryV} />
+      </Wrapper>
+    </Calendar>
   );
 }
 
