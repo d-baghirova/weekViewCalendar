@@ -26,7 +26,7 @@ const ItemToday = styled.div`
   border-radius:100%;
   width: 30px;
   height: 30px;
-  margin: 20px 0 0 20px ;
+  margin: 20px 0 0 10px ;
   font-size: 20px;
   text-align: center;
 `
@@ -117,7 +117,7 @@ function Week({query, year, month, week, onWeek, onYear, onMonth}) {
   return (
     <Wrapped>
       <Grid>
-        {chosenWeek.map((day, i) => i===ind+8 ? <ItemToday key={i}>{day}</ItemToday> : <Item key={i}>{day}</Item>)}
+        {chosenWeek.map((day, i) => i===ind+9 ? <ItemToday key={i}>{day}</ItemToday> : <Item key={i}>{day}</Item>)}
       </Grid>
       <Month>
         <Arrow onClick={handleBack} id="back">{'<'}</Arrow>
