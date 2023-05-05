@@ -11,9 +11,13 @@ const Button = styled.button`
 
 const Del = styled(Button)`
   display:none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: red;
   text-decoration: none;
+  @media (max-width: 750px) {
+    padding-left: 20px;
+    font-size: 1rem;
+  }
   &:hover,
   &:focus {
     color: palevioletred;
@@ -24,6 +28,7 @@ const Del = styled(Button)`
 `;
 
 const Heading = styled.div`
+  mx-width: 750px;
   display: flex;
   justify-content: space-between;
   background-color: #f6f6f6;
@@ -31,16 +36,24 @@ const Heading = styled.div`
 `
 
 const Day = styled.button`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   border: 2px solid transparent;
   background-color:transparent;
   color:red
+  @media (max-width: 750px) {
+    padding-left: 20px;
+    font-size: 1rem;
+  }
 `
 
 const Today = styled(Day)`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: red;
   text-decoration: none;
+  @media (max-width: 750px) {
+    font-size: 1rem;
+    padding-left: 20px;
+  };
   &:hover,
   &:focus {
     color: palevioletred;

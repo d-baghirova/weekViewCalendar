@@ -10,11 +10,12 @@ const Calendar = styled.div`
   display: flex;
   align-items: center;
   justify-content:center;
+  height: 100vh
 `
 
 const Wrapper = styled.section`
   max-width: 750px;
-  padding: 1em;
+  padding: 5vw;
   background:white;
   margin:0;
   padding:0;
@@ -38,7 +39,7 @@ function App() {
       <Wrapper>
         <AddInterview query={query} onQuery={setQuery} queryV={queryV} onQueryV={setQueryV} onWeek={setWeek} onYear={setYear} onMonth={setMonth} />
         <Week queryV={queryV} year={year} month={month} week={week} onWeek={setWeek} onYear={setYear} onMonth={setMonth} />
-        <Hours onClicked={setClicked} clicked={clicked}  query={query} queryDelete={queryDelete} onQueryDelete={setQueryDelete} week={week} />
+        <Hours onClicked={setClicked} clicked={clicked}  query={query} onQueryDelete={setQueryDelete} week={week} />
         <Delete query={query} onQuery={setQuery} onClicked={setClicked} clicked={clicked} onQueryDelete={setQueryDelete} queryDelete={queryDelete} week={week} onQueryV={setQueryV} />
       </Wrapper>
     </Calendar>

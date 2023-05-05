@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
-    margin-right: 30px;
     border: none;
     padding: 0;
     background: none;
 `;
 
 const Plus = styled(Button)`
-  font-size: 2rem;
+  font-size: 1.2rem;
   color: red;
   text-decoration: none;
+  margin-right: 10px;
   &:hover,
   &:focus {
     color: palevioletred;
@@ -27,14 +27,20 @@ const Heading = styled.div`
 `
 
 const H1 = styled.p`
-  margin-left: 30px;
   font-size: 1.5rem;
+  background-color: white; 
+  display: flex; 
+  @media (max-width: 750px) {
+    font-size: 1rem;
+    margin-left: 10px;
+  }
+`
+
+const Mimic = styled.form`
+border: 2px solid gray; background-color: white; display: flex; flex-direction:column"
 `
 
 export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, onYear, onMonth}) {
-
-  const [day, setDay] = useState('');
-  const [hour, setHour] = useState('');
 
   useEffect(() => {
     if (typeof queryV[0] === 'string'){
@@ -113,7 +119,7 @@ const getWeekFromDate = (d) => {
 }
 
   return (
-    <Heading>
+    <Heading id='heading'>
       <H1>Interviews Calendar</H1>
       <Plus onClick={handlePlus}>+</Plus>
     </Heading>

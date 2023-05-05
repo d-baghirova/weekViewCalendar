@@ -9,6 +9,7 @@ const Wrapped = styled.div`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto;
+  width: 87%;
 `
 
 const Item = styled.div`
@@ -17,6 +18,9 @@ const Item = styled.div`
   padding: 20px;
   font-size: 20px;
   text-align: center;
+  @media (max-width: 750px) {
+    padding: 10px;
+  }
 `
 
 const ItemToday = styled.div`
@@ -29,13 +33,16 @@ const ItemToday = styled.div`
   margin: 20px 0 0 10px ;
   font-size: 20px;
   text-align: center;
+  @media (max-width: 750px){
+    margin: 10px 0 0 5px ;
+  }
 `
 
 const Month = styled.div`
   display: flex;
   margin-left:13%;
   width: 87%;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `
 
 const Btn = styled.button`
@@ -47,6 +54,10 @@ const Btn = styled.button`
  
 const P = styled.p`
   font-size: 1.5rem;
+  @media (max-width: 750px) {
+    font-size: 1rem;
+  }
+
 `
 
 const Arrow = styled(Btn)`
@@ -59,10 +70,12 @@ const Arrow = styled(Btn)`
   }
   &:active {
     color: coral;
+  } @media (max-width: 750px){
+    font-size: 1rem
   }
 `;
 
-function Week({query, year, month, week, onWeek, onYear, onMonth}) {
+function Week({year, month, week, onWeek, onYear, onMonth}) {
 
   const chosenWeek = ['','M', 'T', 'W', 'T', 'F', 'S', 'S', ''];
   const todayDate = new Date();

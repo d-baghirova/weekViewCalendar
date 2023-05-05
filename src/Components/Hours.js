@@ -13,18 +13,28 @@ grid-gap: 1px
 
 const H = styled.div`
 width: 12%;
+text-align: right;
 color: #e6e6e6;
+margin-right: 5px;
+@media (max-width:750px){
+  font-size: 12px;
+}
+`
+
+const Rp = styled.p`
+  @media (max-width:750px){
+    width: 20px;
+  }
 `
 
 const Hour = styled.div`
 display:flex
 `
 
-function Hours({query, onClicked, clicked, queryDelete, onQueryDelete, week}) {
+function Hours({query, onClicked, clicked, onQueryDelete, week}) {
 
   const [hs, setHs] = useState('');
   const [fields, setFields] = useState('');
-  const [interviews, setInterviews] = useState([]);
 
   useEffect(() => {
     makeHs();
@@ -32,10 +42,9 @@ function Hours({query, onClicked, clicked, queryDelete, onQueryDelete, week}) {
   }, [])
 
   const makeHs = () => {
-    let hours = document.getElementById("H");
     let str;
     for (let i=9; i<21; i++){
-      Math.floor(i/10)===0 ? str += `<h3>${`0${i}:00`}</h3>` : str += `<h3>${`${i}:00`}</h3>`;
+      Math.floor(i/10)===0 ? str += `<p>${`0${i}:00`}</p>` : str += `<p>${`${i}:00`}</p>`;
     }
     if (str !== undefined && str !== null){
       setHs(str)
