@@ -10,7 +10,8 @@ const Calendar = styled.div`
   display: flex;
   align-items: center;
   justify-content:center;
-  height: 100vh
+  @media (max-width: 750px){
+  height: 100vh}
 `
 
 const Wrapper = styled.section`
