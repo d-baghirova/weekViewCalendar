@@ -48,7 +48,7 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
   },[queryV])
 
   const validate = (str) => {
-    return !Number.isNaN(new Date(str).getTime());
+    return !Number.isNaN(new Date(str[0, 18]).getTime());
   }
 
   const validateHour = (str) => {
@@ -63,10 +63,10 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
   }
 
   const handlePlus = () => {
-    let datee = prompt("YYYY-MM-DD HH:mm:ss");
+    let datee = prompt("YYYY-MM-DD HH:mm:ss describtion");
     console.log(validateHour(datee))
-    if (validate(datee) && validateHour(datee)){
-      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17)+'0Z';
+    if (validate(datee) && validateHour(datee) && !(query.includes(datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'))){
+      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z';
       onQueryV([format]);
       onQuery([...query, format])
     } else if (!validate(datee)) {
