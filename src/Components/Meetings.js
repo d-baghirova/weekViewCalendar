@@ -1,7 +1,7 @@
 function Meetings({query}) {
 
     const normalize = (datee) => {
-        return datee.slice(0,4) + ' year ' + datee.slice(5, 7) + ' month ' + datee.slice(8, 10) + ' day ' + ' ' + datee.slice(11,16);
+        return 'Year: ' + datee.slice(0,4) +' Month: '  + datee.slice(5, 7) + ' Day: ' + datee.slice(8, 10) + ' Time: ' + datee.slice(11,16);
     }
 
     const describtion = (datee) => {
@@ -9,7 +9,7 @@ function Meetings({query}) {
     }
 
     const meetings = () => {
-        return query.map(m => <div><p>{normalize(m)}</p><p>{describtion(m)}</p></div> );
+        return query.map((m, i) => <div key={i}><p>{normalize(m)}</p><p>Describtion: {describtion(m)}</p></div> );
     }
 
     return (

@@ -67,7 +67,7 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
   }
 
   //2023-12-18 13:00:00 JOTORO
-
+ 
   const handlePlus = () => {
     let datee = prompt("YYYY-MM-DD HH:mm:ss describtion");
     console.log(validateHour(datee))
