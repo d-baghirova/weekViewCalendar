@@ -108,9 +108,15 @@ function Hours({query, onClicked, clicked, onQueryDelete, week}) {
       document.getElementById('grid').innerHTML = fields;}
     
     if (query !== [] && query !== undefined && query !== null && query !== false && query){
-      getInterviews(query);
+      getInterviews(query.slice(0, 23));
     }
   }
+
+
+  
+
+
+
 
   renderHsAndFields();
 

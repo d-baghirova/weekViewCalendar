@@ -48,7 +48,11 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
   },[queryV])
 
   const validate = (str) => {
-    return !Number.isNaN(new Date(str[0, 18]).getTime());
+    if (str && str.length >= 18){
+      return !Number.isNaN(new Date(str[0, 18]).getTime());
+    } else {
+      return false;
+    }
   }
 
   const validateHour = (str) => {
@@ -62,11 +66,13 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
     }
   }
 
+  //2023-12-18 13:00:00 JOTORO
+
   const handlePlus = () => {
     let datee = prompt("YYYY-MM-DD HH:mm:ss describtion");
     console.log(validateHour(datee))
     if (validate(datee) && validateHour(datee) && !(query.includes(datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'))){
-      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z';
+      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'+datee.slice(18);
       onQueryV([format]);
       onQuery([...query, format])
     } else if (!validate(datee)) {
@@ -80,7 +86,7 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
     if (queryV[0]!==undefined && queryV[0]!==null && queryV[0]!==false){
     let chosenDay = queryV[queryV.length-1];
     if (chosenDay){
-    let mon = getMonday(chosenDay);
+    let mon = getMonday(chosenDay.slice(0, 23));
     let result = getWeekFromDate(mon);
     onYear(mon.slice(0,4));
     onMonth(mon.slice(5,7));
