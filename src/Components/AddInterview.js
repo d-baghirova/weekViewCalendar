@@ -67,15 +67,15 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
   }
 
   //2023-12-18 13:00:00 JOTORO
-
+  
   const handlePlus = () => {
     let datee = prompt("YYYY-MM-DD HH:mm:ss describtion");
     console.log(validateHour(datee))
-    if (validate(datee) && validateHour(datee) && !(query.includes(datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'))){
+    if (query && validate(datee) && validateHour(datee) && !(query.includes(datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'))){
       let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'+datee.slice(18);
       onQueryV([format]);
       onQuery([...query, format])
-    } else if (!validate(datee)) {
+    } else if (query && !validate(datee)) {
       alert('Incorect input! Correct input example: 2020-12-18 10:10:08 (year-month-day hours:minutes:seonds)')
     } else if (!validateHour(datee)){
       alert('You can schedule an interview only between 08:00 and 20:00!')
