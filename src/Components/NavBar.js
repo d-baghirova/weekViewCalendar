@@ -6,7 +6,27 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
 const quer = JSON.parse(localStorage.getItem('query'));
-const queryFromLocalStorage = quer ? (localStorage.getItem('query')) : [];
+const queryFromLocalStorage = (localStorage.getItem('query')) ? quer : [];
+
+// const decode = (value) => {
+//   return JSON.stringify(value)
+// }
+
+// const encode = (value) => {
+//   return JSON.parse(value)
+// }
+
+// const useLocalStorage = (key, defaultState) => {
+//     const [value, setValue] = useState(
+//       encode(localStorage.getItem(key)||null) || defaultState
+//     )
+  
+//     useEffect(() => {
+//       localStorage.setItem(key, decode(value))
+//     },  [value])
+  
+//     return [value, setValue]
+//   }
 
 function NavBar() {
     const [query, setQuery] = useState(queryFromLocalStorage);
