@@ -79,12 +79,8 @@ function Week({year, month, week, onWeek, onYear, onMonth}) {
 
   const chosenWeek = ['','M', 'T', 'W', 'T', 'F', 'S', 'S', ''];
   const todayDate = new Date();
-
-  
   const tdate = week.find(d => d.slice(0,10) === todayDate.toISOString().slice(0,10));
   let ind;
-
-
   if (tdate){
     ind = week.indexOf(tdate);
   }
@@ -132,7 +128,7 @@ function Week({year, month, week, onWeek, onYear, onMonth}) {
   }
   
   return (
-    <Wrapped> 
+    <Wrapped>
       <Grid>
         {chosenWeek.map((day, i) => i===ind+9 ? <ItemToday key={i}>{day}</ItemToday> : <Item key={i}>{day}</Item>)}
       </Grid>

@@ -4,7 +4,7 @@ import AddInterview from "./AddInterview";
 import Week from "./Week";
 import Hours from "./Hours";
 import Delete from "./Delete";
-import { useState, useEffect } from "react"; 
+import { useState } from "react";
 
 const Calendar = styled.div`
   display: flex;
@@ -23,8 +23,6 @@ const Wrapper = styled.section`
   border: 2px solid #e6e6e6;
 `;
 
-const queryFromLocalStorage = JSON.parse(localStorage.getItem('query'));
- 
 function Calendarik({query, setQuery}) {
   let q = new Date();
   let qu = q.toISOString();
@@ -34,11 +32,8 @@ function Calendarik({query, setQuery}) {
   const [month, setMonth] = useState('');
 
   const [queryDelete, setQueryDelete] = useState('');
-  // const [query, setQuery] = useState(queryFromLocalStorage);
-  //const [query, setQuery] = useState(queryFromLocalStorage);
+  // const [query, setQuery] = useState([]);
   const [clicked, setClicked] = useState([false, '0btn']);
-
-  // useEffect(() => { localStorage. setItem('query', JSON. stringify(query)); }, [query]);
 
   return (
     <Calendar>

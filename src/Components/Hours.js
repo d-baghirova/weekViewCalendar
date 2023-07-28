@@ -116,7 +116,7 @@ function Hours({query, onClicked, clicked, onQueryDelete, week}) {
   
 
 
- 
+
 
   renderHsAndFields();
 
