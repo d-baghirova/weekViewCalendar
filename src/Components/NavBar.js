@@ -4,6 +4,7 @@ import Calendarik from './Calendarik';
 import Meetings from './Meetings';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import Notifications from './Notifications';
 
 const quer = JSON.parse(localStorage.getItem('query'));
 const queryFromLocalStorage = (localStorage.getItem('query')) ? quer : [];
@@ -39,11 +40,13 @@ function NavBar() {
                 <Link to='/'>Home</Link>
                 <Link to='/calendar'>Calendar</Link>
                 <Link to='/meetings'>Meetings</Link> 
+                <Link to='/notifications'>Notifications</Link>
             </nav>
             <Routes>
                 <Route exact path='/' element={<Home />}></Route>
                 <Route exact path='/calendar' element={<Calendarik query={query} setQuery={setQuery} />}></Route>
                 <Route exact path='/meetings' element={<Meetings query={query} />}></Route> 
+                <Route exact path='/notifications' element={<Notifications query={query} />}></Route> 
             </Routes>
         </div>
     )

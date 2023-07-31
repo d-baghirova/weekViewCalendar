@@ -75,7 +75,7 @@ function Hours({query, onClicked, clicked, onQueryDelete, week}) {
   const findField = (date) => {
     let dayArr =  week.filter(d => date.slice(0,10) === d.slice(0,10));
     let day = week.indexOf(dayArr[0]);
-    let hour = (Number(date.slice(14, 16)))-8;
+    let hour = (Number(date.slice(11, 13)))-8;
     let fieldId = hour*7 + day;
     return fieldId;
   }

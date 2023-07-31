@@ -71,8 +71,8 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
   const handlePlus = () => {
     let datee = prompt("YYYY-MM-DD HH:mm:ss describtion");
     console.log(validateHour(datee))
-    if (validate(datee) && validateHour(datee) && !(query.includes(datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'))){
-      let format = datee.slice(0,10) + 'T19:' + datee.slice(11,16)+'.'+datee.slice(17, 18)+'0Z'+datee.slice(18);
+    if (validate(datee) && validateHour(datee) && !(query.includes(datee.slice(0,10) + 'T' + datee.slice(11,19)+'.000Z'))){
+      let format = datee.slice(0,10) + 'T' + datee.slice(11,19)+'.000Z'+datee.slice(19);
       onQueryV([format]);
       onQuery([...query, format])
     } else if (!validate(datee)) {
@@ -126,7 +126,7 @@ const getWeekFromDate = (d) => {
 
   return (
     <Heading id='heading'>
-      <H1>Interviews Calendar</H1>
+      <H1>Events Calendar</H1>
       <Plus onClick={handlePlus}>+</Plus>
     </Heading>
   );

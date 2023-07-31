@@ -9,7 +9,7 @@ function Meetings({query}) {
     }
 
     const meetings = () => {
-        return query.map(m => <div><p>{normalize(m)}</p><p>{describtion(m)}</p></div> );
+        return query.map((m, i) => <div key={i}><p>{normalize(m)}</p><p>{describtion(m)}</p></div> );
     }
 
     return (
