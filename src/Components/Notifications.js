@@ -13,7 +13,7 @@ Date.prototype.addHours = function(h) {
 
 
 
-function Notifications({query}) {
+function Notifications({notificationType, setNotificationType}) {
 
     const options = [
 
@@ -31,12 +31,10 @@ function Notifications({query}) {
 
     ];
      
-    const [notificationType, setNotificationType] = useState(60);
-     
     const handleChange = (event) => {
      
         setNotificationType(event.target.value);
-     
+        
     };
 
     const work = () => {
@@ -46,80 +44,6 @@ function Notifications({query}) {
             )
         })
     }
-
-    const notifyMe = (description) => {
-        const notification = new Notification(description,
-            {body: `${description} will be in an hour check your schedule and get ready`}
-        );
-
-        notification.close();
-    }
-    const subtractHours = (date, hours) => {
-      date.setHours(date.getHours() - (hours));
-    
-      return date;
-    }
-
-    function subMins(d, mins) {
-        const absolute = Math.abs(mins);
-        let date = new Date(d - absolute * 60000);
-        
-        return date;
-      }
-      
-
-    const getDif = (date) => {
-        const now = new Date();
-        return now-date;
-    }
-
-    const getNum = (d, nt) => {
-        if (nt.slice(1)==='hour' || nt.slice(1)==='hours'){
-            return subtractHours(d, Number(nt.slice(0,1)));
-        } else if (nt.slice(1)==='day' || nt.slice(1)==='days'){
-            return subtractHours(d, Number(nt.slice(0,1)*24));
-        } else if (nt === '1week'){
-            return subtractHours(d, Number(nt.slice(0,1)*24*7));
-        } 
-    }
-
-    const myTimeZone = (d) => {
-        return Math.round(d.getTimezoneOffset() * 60000);
-    }
-
-    const getTimer = (d, m) => {
-        const tz = myTimeZone(d);
-        const dd = new Date(d.getTime() + tz);
-        const whenToNotify = subMins(dd, m);
-        return (-1)*getDif(whenToNotify);
-    }
-
-    const checkSchedule = (queryFromLocalStorage, m) => {
-        if (queryFromLocalStorage != null){
-            queryFromLocalStorage.forEach(q => {
-                const d = new Date(q.slice(0,24));
-                console.log(getTimer(d, m));
-
-                if (getTimer(d, m) > 0){
-                    const timer = setTimeout(() => {
-                        notifyMe(q.slice(24));
-                    }, getTimer(d, m));
-                    return () => clearTimeout(timer);
-                }
-
-            })
-        }
-    } 
-
-
-    useEffect(() => {
-        
-        let queryFromLocalStorage = JSON.parse(localStorage.getItem('query'));
-
-        checkSchedule(queryFromLocalStorage, notificationType);
-
-    }, [query, notificationType]);
-
 
     return(
         <div>
