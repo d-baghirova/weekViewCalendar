@@ -1,29 +1,12 @@
-import {Route, Routes, Link} from 'react-router-dom';
+import {Route, Routes, Link, useLocation} from 'react-router-dom';
 import Home from './Home';
 import Calendarik from './Calendarik';
 import Meetings from './Meetings';
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import Notifications from './Notifications';
+import './NavBar.css';
 
-// const quer = JSON.parse(localStorage.getItem('query'));
-// const queryFromLocalStorage = (localStorage.getItem('query')) ? quer : [];
-
-
-function NavBar({query, setQuery, notificationType, setNotificationType}) {
-    // const [query, setQuery] = useState(queryFromLocalStorage);
-
-    // useEffect(() => { localStorage.setItem('query', JSON.stringify(query)); }, [query]);
-
-    // const [notificationType, setNotificationType] = useState(60);
-
-    const work = () => {
-        Notification.requestPermission().then(perm => {
-            new Notification('Thank you',
-            {body: "for using our notifications"}
-            )
-        })
-    }
+function NavBar({query, setQuery, notificationType, setNotificationType }) {
 
     const notifyMe = (description) => {
         const notification = new Notification(description,
@@ -32,6 +15,7 @@ function NavBar({query, setQuery, notificationType, setNotificationType}) {
 
         notification.close();
     }
+
     const subtractHours = (date, hours) => {
       date.setHours(date.getHours() - (hours));
     
@@ -43,22 +27,16 @@ function NavBar({query, setQuery, notificationType, setNotificationType}) {
         let date = new Date(d - absolute * 60000);
         
         return date;
-      }
+    } 
       
+    // const sumDateWithMilliseconds = (date, milliseconds) => {
+    //     let newDate = new Date(date.getTime() + milliseconds);
+    //     return newDate;
+    //   }
 
     const getDif = (date) => {
         const now = new Date();
         return now-date;
-    }
-
-    const getNum = (d, nt) => {
-        if (nt.slice(1)==='hour' || nt.slice(1)==='hours'){
-            return subtractHours(d, Number(nt.slice(0,1)));
-        } else if (nt.slice(1)==='day' || nt.slice(1)==='days'){
-            return subtractHours(d, Number(nt.slice(0,1)*24));
-        } else if (nt === '1week'){
-            return subtractHours(d, Number(nt.slice(0,1)*24*7));
-        } 
     }
 
     const myTimeZone = (d) => {
@@ -98,23 +76,25 @@ function NavBar({query, setQuery, notificationType, setNotificationType}) {
 
     }, [query, notificationType]);
 
+    console.log(useLocation().pathname);
+
 
     return(
-        <div>
-            <nav>
-                <Link to='/'>Home</Link>
-                <Link to='/calendar'>Calendar</Link>
-                <Link to='/meetings'>Meetings</Link> 
-                <Link to='/notifications'>Notifications</Link>
+        <div className='NavBar'>
+            <nav> 
+                <Link id="left"  className={useLocation().pathname == '/' ? 'here' : 'not'}              to='/'>Home</Link>
+                <Link            className={useLocation().pathname == '/calendar' ? 'here' : 'not'}      to='/calendar'>Calendar</Link>
+                <Link            className={useLocation().pathname == '/meetings' ? 'here' : 'not'}      to='/meetings'>Events</Link>
+                <Link id="right" className={useLocation().pathname == '/notifications' ? 'here' : 'not'} to='/notifications'>Reminder</Link>
             </nav>
             <Routes>
                 <Route exact path='/' element={<Home />}></Route>
-                <Route exact path='/calendar' element={<Calendarik query={query} setQuery={setQuery} />}></Route>
+                <Route exact path='/calendar' element={<Calendarik myTimeZone={myTimeZone} query={query} setQuery={setQuery} />}></Route>
                 <Route exact path='/meetings' element={<Meetings query={query} />}></Route> 
                 <Route exact path='/notifications' element={<Notifications notificationType={notificationType} setNotificationType={setNotificationType} query={query} />}></Route> 
             </Routes>
         </div>
-    )
+    ) 
 }
 
 export default NavBar;

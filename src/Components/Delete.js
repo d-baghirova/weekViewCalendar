@@ -63,7 +63,7 @@ const Today = styled(Day)`
   }
 `;
 
-export default function Delete({query, onQuery, onClicked, clicked, onQueryDelete, queryDelete, week, onQueryV}) {
+export default function Delete({query, onQuery, onClicked, clicked, onQueryDelete, queryDelete, week, onQueryV, myTimeZone}) {
 
   const [deleteIt, setDeleteIt] = useState('');
 
@@ -80,10 +80,23 @@ export default function Delete({query, onQuery, onClicked, clicked, onQueryDelet
     return q;
   }
 
+  const sumDateWithMilliseconds = (date, milliseconds) => {
+    let newDate = new Date(date.getTime() + milliseconds);
+    return newDate;
+  }
+
   const handleToday = () => {
     let q = new Date();
+    const popravka = sumDateWithMilliseconds(q, myTimeZone(q)).toISOString();
     let qu = q.toISOString();
-    onQueryV([qu]);
+    onQueryV([popravka]);
+  }
+
+  const handleTodayy = () => {
+    let q = new Date();
+    const popravka = sumDateWithMilliseconds(q, (-1)*myTimeZone(q)).toISOString();
+    let qu = q.toISOString();
+    onQueryV([popravka]);
   }
 
   useEffect(() => {

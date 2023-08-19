@@ -1,0 +1,41 @@
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    padding: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: white;
+    border: 2px solid transparent;
+    background-color:#ec4141;
+}
+
+/* nav div {
+    padding: 10px;
+    background-color:#ec4141;
+} */
+
+a:hover {
+    background-color: #ef5b5b;
+}
+
+.here {
+    background-color: #ef5b5b;
+}
+
+#left {
+    border-radius: 0 0 0 25%;
+}
+
+#right {
+    border-radius: 0 0 20% 0;
+}
+
+@media screen and (max-width: 320px) {
+    a {
+        font-size: 15px;
+        padding: 5px;
+    }
+}

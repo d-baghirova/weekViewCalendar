@@ -1,10 +1,4 @@
-import {Route, Routes, Link} from 'react-router-dom';
-import Home from './Home';
-import Calendarik from './Calendarik';
-import Meetings from './Meetings';
-import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import logo from './images/logo512.png';
+import './Notifications.css';
 
 Date.prototype.addHours = function(h) {
     this.setTime(this.getTime() + (h*60*60*1000));
@@ -46,19 +40,22 @@ function Notifications({notificationType, setNotificationType}) {
     }
 
     return(
-        <div>
-           <button onClick={work}>Notify me</button>
-           <select value={notificationType} onChange={handleChange}>
+        <div className="notifications">
 
-         {options.map((option, i) => (
+          <img className='mini' src='/assets/calendar-clock.png' />
 
-           <option key={i} value={option.value}>{option.label}</option>
+          <div className='t'>
+          <p className='textt'>After clicking on "Notify me" button, you must get a pop-up with question or a notification. If you don't get neither of them, try to turn on notifications in settings of your browser or in settings of your device.<br /><br /> Unfortunately, this feature doesn't work at most of the phones. But it works on computers.</p>
+            <button className="btn" onClick={work}>Notify me</button>
+            <select className="n" value={notificationType} onChange={handleChange}>
 
-         ))}
+                {options.map((option, i) => (
+                    <option key={i} value={option.value}>{option.label}</option>
+                ))}
 
-       </select>
-
-     <p>We eat {notificationType}!</p>
+            </select>
+            </div>
+            
         </div>
     );
 }

@@ -1,0 +1,116 @@
+.btn {
+    padding: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: white;
+    border: 2px solid transparent;
+    background-color:#ec4141;
+    border-radius: 10px;
+    height: 50px;
+    margin: 10px;
+}
+
+.btn:hover {
+    background-color: #ef5b5b;
+}
+
+.n {
+    background-color: #ef5b5b;
+    border: 2px solid transparent;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    height: 50px;
+}
+
+option {
+    background-color: #ef5b5b;
+}
+
+option:hover, option:focus {
+    background-color: #ec4141;
+}
+
+.t {
+    width: 50%;
+    text-align: left;
+    display: block;
+}
+
+.textt {
+    width: 80%;
+    
+}
+
+.notifications {
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    border: 2px solid transparent;
+    background-color: #e8e7e7;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.mini {
+    width: 300px;
+    height: 300px;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .n {
+        width: 115px;
+        background-color: #ef5b5b;
+        border: 2px solid transparent;
+        padding: 5px;
+        border-radius: 10px;
+        color: white;
+        height: 50px;
+    }
+
+    .notifications {
+        width: 80%;
+        margin-left: 10%;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .btn {
+        margin: 0 10px 0 0;
+    }
+
+    .mini {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .notifications {
+        display: block;
+    }
+
+    .t {
+        width: 90%;
+        margin-left: 5%;
+    }
+    
+    .textt {
+        width: 100%;
+        
+    }
+}
+
+@media screen and (max-width: 285px) {
+    .btn {
+        padding: 5px;
+        margin: 0 10px 0 0;
+    }
+
+    .n {
+        padding: 5px;
+    }
+}

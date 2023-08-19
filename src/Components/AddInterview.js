@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = styled.button`
     border: none;
-    padding: 0;
+    padding: 0; 
     background: none;
 `;
 
@@ -76,7 +76,7 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
       onQueryV([format]);
       onQuery([...query, format])
     } else if (!validate(datee)) {
-      alert('Incorect input! Correct input example: 2020-12-18 10:10:08 (year-month-day hours:minutes:seonds)')
+      alert('Incorect input! Correct input example: 2020-12-18 10:10:08 Party (year-month-day hours:minutes:seconds Description)')
     } else if (!validateHour(datee)){
       alert('You can schedule an interview only between 08:00 and 20:00!')
     }
@@ -84,14 +84,15 @@ export default function AddInterview({query, onQuery, queryV, onQueryV, onWeek, 
 
   const currently = () => {
     if (queryV[0]!==undefined && queryV[0]!==null && queryV[0]!==false){
-    let chosenDay = queryV[queryV.length-1];
-    if (chosenDay){
-    let mon = getMonday(chosenDay.slice(0, 23));
-    let result = getWeekFromDate(mon);
-    onYear(mon.slice(0,4));
-    onMonth(mon.slice(5,7));
-    onWeek(result);}
-  }
+      let chosenDay = queryV[queryV.length-1];
+      if (chosenDay){
+        let mon = getMonday(chosenDay.slice(0, 23));
+        let result = getWeekFromDate(mon);
+        onYear(mon.slice(0,4));
+        onMonth(mon.slice(5,7));
+        onWeek(result);
+      }
+    }
   }
 
   const getMonday = (d) => {
